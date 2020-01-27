@@ -1,0 +1,17 @@
+# Run it with command: "docker-compose up"
+
+version: '3'
+services:
+  web:
+#    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      # For -p 3100:3000 part
+      - 3100:3000
+    volumes:
+      # For -v /app/node_modules part
+      - /app/node_modules
+      # For -v $(pwd):/app part
+      - .:/app
