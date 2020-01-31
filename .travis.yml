@@ -9,3 +9,18 @@ script:
   # Workaround for "npm test -- --coverage" never exits (!) - add key "-e CI=true"
   # See https://stackoverflow.com/questions/55991641/npm-test-coverage-never-exits
   - docker run -e CI=true aleksandrborkov/docker-react yarn test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: docker
+  env: Docker-env
+  bucket_name: elasticbeanstalk-us-east-2-403107504045
+  # Equals the app name
+  bucket_path: docker
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+
